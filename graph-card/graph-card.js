@@ -14,6 +14,7 @@ class GraphCard extends HTMLElement {
           this.appendChild(card);
           this.initGraph(this.content);
         }
+				
     }
 
     initGraph(element) {
@@ -54,7 +55,8 @@ class GraphCard extends HTMLElement {
             ],
             yAxis: [
                 {
-                    type : 'value'
+                    type : this._config.yAxis_type,
+										logBase: this._config.log_base
                 }
             ],
             dataZoom: [
@@ -81,7 +83,9 @@ class GraphCard extends HTMLElement {
             series : []
         };
 
-        for (const entity of this.entities) {
+				console.log( this.yAxis_type );
+				
+				for (const entity of this.entities) {
             this.update_options.series.push({
                 	smooth: entity.smooth || true,
                     name: entity.name || '',
@@ -129,7 +133,7 @@ class GraphCard extends HTMLElement {
                 data.push({
                     name: d.toString(),
                     value: [
-                        [d.getFullYear(), d.getMonth() + 1, d.getDate()].join('/') + 'T' + d.toLocaleTimeString(),
+                        d.getTime(), //[d.getFullYear(), d.getMonth() + 1, d.getDate()].join('/') + 'T' + d.toLocaleTimeString(),
                         state.state
                     ]
                 });
@@ -179,13 +183,15 @@ class GraphCard extends HTMLElement {
     }
     
   setConfig(config) {
+		console.log( config );
+		console.log( this.initial_options );
     this._config = config;
     this.title = config.title || '';
     this.hoursToShow = config.hours_to_show || 24;
     this.update_interval = config.update_interval || 30;
     this.graph_height = config.graph_height || 300;
     this.zoom = config.zoom || 0;
-
+		
     this.entities = [];
     this.entity_ids = [];
     
