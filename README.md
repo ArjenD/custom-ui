@@ -1,6 +1,8 @@
 ## Lovelace custom-ui
 
-This repository contains some custom elements I have created for [Home Assistant](https://www.home-assistant.io)
+This repository contains some custom elements bramkragten has created for [Home Assistant](https://www.home-assistant.io)
+
+see [Apache echarts](https://github.com/apache/incubator-echarts) for detailed information of the used charting-library.
 
 # Weather card
 A custom weather card in material style with animated icons.
